@@ -70,12 +70,7 @@ public class LoadLayout extends FrameLayout {
     }
 
     private void postToMainThread(final Class<? extends Callback> status) {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                showCallbackView(status);
-            }
-        });
+        post(() -> showCallbackView(status));
     }
 
     private void showCallbackView(Class<? extends Callback> status) {

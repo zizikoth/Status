@@ -1,7 +1,6 @@
 package com.load.status.core;
 
 import android.content.Context;
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -29,12 +28,9 @@ public class LoadService<T> {
                 loadLayout.setupCallback(callback);
             }
         }
-        new Handler().post(() -> {
-            if (defaultCallback != null) {
-                loadLayout.showCallback(defaultCallback);
-            }
-        });
-
+        if (defaultCallback != null) {
+            loadLayout.showCallback(defaultCallback);
+        }
     }
 
     public void showSuccess() {

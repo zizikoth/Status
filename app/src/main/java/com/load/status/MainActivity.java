@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.load.status.core.LoadStatus;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
