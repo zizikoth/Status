@@ -43,15 +43,14 @@ public abstract class Callback implements Serializable {
         if (rootView == null) {
             rootView = View.inflate(context, onCreateView(), null);
         }
-        rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onReloadEvent(context, rootView)) {
-                    return;
-                }
-                if (onReloadListener != null) {
-                    onReloadListener.onReload(v);
-                }
+        View clickView = rootView.findViewById(childRetryClickId());
+        if (clickView == null) clickView = rootView;
+        clickView.setOnClickListener(v -> {
+            if (onReloadEvent(context, rootView)) {
+                return;
+            }
+            if (onReloadListener != null) {
+                onReloadListener.onReload(v);
             }
         });
         onViewCreate(context, rootView);
@@ -80,10 +79,6 @@ public abstract class Callback implements Serializable {
         return false;
     }
 
-    protected boolean onReloadEvent(Context context, View view) {
-        return false;
-    }
-
     public Callback copy() {
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         ObjectOutputStream oos;
@@ -102,10 +97,6 @@ public abstract class Callback implements Serializable {
         return (Callback) obj;
     }
 
-    public OnReloadListener getOnReloadListener(){
-        return onReloadListener;
-    }
-
     /**
      * @since 1.2.2
      */
@@ -121,6 +112,14 @@ public abstract class Callback implements Serializable {
     }
 
     protected abstract int onCreateView();
+
+    protected boolean onReloadEvent(Context context, View view) {
+        return false;
+    }
+
+    protected int childRetryClickId() {
+        return View.NO_ID;
+    }
 
     /**
      * Called immediately after {@link #onCreateView()}
