@@ -102,6 +102,10 @@ public abstract class Callback implements Serializable {
         return (Callback) obj;
     }
 
+    public OnReloadListener getOnReloadListener(){
+        return onReloadListener;
+    }
+
     /**
      * @since 1.2.2
      */
