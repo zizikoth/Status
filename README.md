@@ -10,6 +10,6 @@
 	}
   
 	dependencies {
-	        implementation 'com.github.zizikoth:Status:1.0.3'
+	        implementation 'com.github.zizikoth:Status:a.b.c'
 	}
 ```
